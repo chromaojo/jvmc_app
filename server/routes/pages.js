@@ -129,8 +129,8 @@ route.post('/login/account', async (req, res) => {
          a.office,
          a.gender,
          a.resume_date
-       FROM jvmc.jvmc_users u
-       LEFT JOIN jvmc.jvmc_profile a ON u.user_id = a.user_id
+       FROM bkew76jt01b1ylysxnzp.jvmc_users u
+       LEFT JOIN bkew76jt01b1ylysxnzp.jvmc_profile a ON u.user_id = a.user_id
        WHERE u.email = ?;
      `;
     // Check if the user and account details with the provided email exists
@@ -181,7 +181,7 @@ route.get('/dashboard', UserLoggin, (req, res) => {
     if (userCookie) {
         const userId = req.params.userId;
         const sqlw = `
-          SELECT * FROM jvmc.jvmc_report ORDER BY id DESC;
+          SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_report ORDER BY id DESC;
         `;
 
         db.query(sqlw, [userId], (err, results) => {
@@ -215,7 +215,7 @@ route.get('/dashboard/:user_id', UserLoggin, (req, res) => {
     if (userCookie) {
         const user_id = userCookie.user_id
         const sql = `
-          SELECT * FROM jvmc.jvmc_report WHERE user_id = ?  ORDER BY id DESC ;
+          SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_report WHERE user_id = ?  ORDER BY id DESC ;
         `;
 
         db.query(sql, [user_id], (err, results) => {
@@ -251,7 +251,7 @@ route.get('/dash/:id', UserLoggin, async (req, res) => {
 
         // Fetch report data
         const [report] = await new Promise((resolve, reject) => {
-            const sql = `SELECT * FROM jvmc.jvmc_report WHERE report_id = ?;`;
+            const sql = `SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_report WHERE report_id = ?;`;
             db.query(sql, [id], (err, results) => {
                 if (err) return reject(err);
                 resolve(results);
@@ -264,7 +264,7 @@ route.get('/dash/:id', UserLoggin, async (req, res) => {
 
         // Fetch report content data
         const reportContent = await new Promise((resolve, reject) => {
-            const sqls = `SELECT * FROM jvmc.report_content WHERE report_id = ?;`;
+            const sqls = `SELECT * FROM bkew76jt01b1ylysxnzp.report_content WHERE report_id = ?;`;
             db.query(sqls, [id], (err, results) => {
                 if (err) return reject(err);
                 resolve(results);
@@ -315,7 +315,7 @@ route.post('/new/report', async (req, res) => {
 
     // To Fill the Report Data 
 
-    const sql = `INSERT INTO jvmc.jvmc_report (name, title, report_id, date , time, user_id) VALUES (?,?,?,?,?,?)`;
+    const sql = `INSERT INTO bkew76jt01b1ylysxnzp.jvmc_report (name, title, report_id, date , time, user_id) VALUES (?,?,?,?,?,?)`;
     const values = [name, title, report_id, date, time, user_id];
     db.query(sql, values, (err, result) => {
         if (err) {
@@ -339,7 +339,7 @@ route.get('/add/report/:id', UserLoggin, (req, res) => {
     if (userCookie) {
         const id = req.params.id;
         const sql = `
-          SELECT * FROM jvmc.jvmc_report WHERE report_id = ?;
+          SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_report WHERE report_id = ?;
         `;
         db.query(sql, [id], (err, result) => {
             if (err) {
@@ -347,7 +347,7 @@ route.get('/add/report/:id', UserLoggin, (req, res) => {
             }
             const title = result[0].title
 
-            const sqls = `SELECT * FROM jvmc.report_content WHERE report_id = ?; `;
+            const sqls = `SELECT * FROM bkew76jt01b1ylysxnzp.report_content WHERE report_id = ?; `;
             db.query(sqls, [id], (err, results) => {
                 if (err) {
                     return res.status(500).send('Internal Server Error');
@@ -376,7 +376,7 @@ route.post('/add/rep', UserLoggin, async (req, res) => {
         return res.status(400).send('All fields are required');
     }
     // Check if report_id exists in jvmc_report table
-    const checkSql = 'SELECT * FROM jvmc.jvmc_report WHERE report_id = ?';
+    const checkSql = 'SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_report WHERE report_id = ?';
     db.query(checkSql, [report_id], (checkErr, checkResult) => {
         if (checkErr) {
             console.error('Error checking report_id:', checkErr);
@@ -387,7 +387,7 @@ route.post('/add/rep', UserLoggin, async (req, res) => {
             return res.status(404).send('report_id not found');
         }
         // Proceed with inserting into report_content
-        const insertSql = `INSERT INTO jvmc.report_content (action, outcome, status, report_id) VALUES (?, ?, ?, ?)`;
+        const insertSql = `INSERT INTO bkew76jt01b1ylysxnzp.report_content (action, outcome, status, report_id) VALUES (?, ?, ?, ?)`;
         const values = [action, outcome, status, report_id];
 
         db.query(insertSql, values, (insertErr, insertResult) => {
@@ -411,7 +411,7 @@ route.get('/del/content/:id', UserLoggin, async (req, res) => {
             return res.status(401).send('Unauthorized');
         }
 
-        const sqls = `SELECT * FROM jvmc.report_content WHERE id = ?;`;
+        const sqls = `SELECT * FROM bkew76jt01b1ylysxnzp.report_content WHERE id = ?;`;
         db.query(sqls, [id], (err, results) => {
             if (err) {
                 console.error('Error deleting report content:', err);
@@ -419,7 +419,7 @@ route.get('/del/content/:id', UserLoggin, async (req, res) => {
             }
             const report_id = results[0].report_id
             // Perform the deletion
-            const sql = `DELETE FROM jvmc.report_content WHERE id = ?;`;
+            const sql = `DELETE FROM bkew76jt01b1ylysxnzp.report_content WHERE id = ?;`;
             db.query(sql, [id], (err, result) => {
                 if (err) {
                     console.error('Error deleting report content:', err);
@@ -451,7 +451,7 @@ route.get('/del/report/:id', UserLoggin, async (req, res) => {
         }
 
         // Perform the deletion
-        const sql = `DELETE FROM jvmc.report_content WHERE report_id = ?;`;
+        const sql = `DELETE FROM bkew76jt01b1ylysxnzp.report_content WHERE report_id = ?;`;
         db.query(sql, [report_id], (err, result) => {
             if (err) {
                 console.error('Error deleting report content:', err);
@@ -461,7 +461,7 @@ route.get('/del/report/:id', UserLoggin, async (req, res) => {
         });
 
         // To Delete the parent 
-        const sqls = `DELETE FROM jvmc.jvmc_report WHERE report_id = ?;`;
+        const sqls = `DELETE FROM bkew76jt01b1ylysxnzp.jvmc_report WHERE report_id = ?;`;
         db.query(sqls, [report_id], (err, result) => {
             if (err) {
                 console.error('Error deleting report content:', err);
@@ -582,8 +582,8 @@ route.post('/profile/updatePass', UserLoggin, async (req, res) => {
                       a.phone_number1,
                       a.about,
                       a.email as account_email
-                    FROM jvmc.jvmc_users u
-                    LEFT JOIN jvmc.jvmc_accounts a ON u.user_id = a.user_id
+                    FROM bkew76jt01b1ylysxnzp.jvmc_users u
+                    LEFT JOIN bkew76jt01b1ylysxnzp.jvmc_accounts a ON u.user_id = a.user_id
                     WHERE u.email = ?;
                   `;
                     db.query(sqlGetUserWithAccount, [userData.email], async (error, result) => {
