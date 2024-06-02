@@ -30,7 +30,7 @@ route.get('/createDb', (req, res) => {
 route.get('/createTable', (req, res) => {
 
   const sqlUsers = `
-  CREATE TABLE IF NOT EXISTS jvmc.jvmc_users (
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_users (
     id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
     user_id VARCHAR(255) UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
