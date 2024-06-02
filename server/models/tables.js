@@ -38,12 +38,12 @@ route.get('/createTable', (req, res) => {
     department VARCHAR(255),
     username VARCHAR(255),
     user_role ENUM('management', 'staff', 'admin'),
-    FOREIGN KEY (department) REFERENCES jvmc.jvmc_dept(name) 
+    FOREIGN KEY (department) REFERENCES bkew76jt01b1ylysxnzp.jvmc_dept(name) 
   );
 `;
 
   const sqlDept = `
-  CREATE TABLE IF NOT EXISTS jvmc.jvmc_dept (
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_dept (
     id INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
     name VARCHAR(255) UNIQUE,
     hod VARCHAR(255),
@@ -54,7 +54,7 @@ route.get('/createTable', (req, res) => {
 `;
 
   const sqlProfile = `
-  CREATE TABLE IF NOT EXISTS jvmc.jvmc_profile (
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_profile (
     id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
     staff_id VARCHAR(255) UNIQUE,
     surname VARCHAR(255),
@@ -79,12 +79,12 @@ route.get('/createTable', (req, res) => {
     department VARCHAR (255),
     salary VARCHAR(255),
     leave_total INT,
-    FOREIGN KEY (user_id) REFERENCES jvmc.jvmc_users(user_id) /* This has a 1:1 relation */
+    FOREIGN KEY (user_id) REFERENCES bkew76jt01b1ylysxnzp.jvmc_users(user_id) /* This has a 1:1 relation */
   ); 
 `;
 
   const sqlReports = `
-CREATE TABLE IF NOT EXISTS jvmc.jvmc_report (
+CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_report (
   id INT AUTO_INCREMENT PRIMARY KEY,
   report_id VARCHAR(255) UNIQUE,
   title VARCHAR(255) NOT NULL,
@@ -96,19 +96,19 @@ CREATE TABLE IF NOT EXISTS jvmc.jvmc_report (
 `;
 
   const sqlReport = `
-    CREATE TABLE IF NOT EXISTS jvmc.report_content (
+    CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.report_content (
       id INT PRIMARY KEY AUTO_INCREMENT,
       action TEXT,
       outcome TEXT,
       status VARCHAR(100),
       report_id VARCHAR(255) NOT NULL,
-      FOREIGN KEY (report_id) REFERENCES jvmc.jvmc_report(report_id)
+      FOREIGN KEY (report_id) REFERENCES bkew76jt01b1ylysxnzp.jvmc_report(report_id)
     );
   `;
 
 
   const sqlLeave = `
-  CREATE TABLE IF NOT EXISTS jvmc.jvmc_leave(
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_leave(
     id INT PRIMARY KEY AUTO_INCREMENT,
     leave_id VARCHAR(255) UNIQUE,
     name VARCHAR(255) NOT NULL,
@@ -121,11 +121,11 @@ CREATE TABLE IF NOT EXISTS jvmc.jvmc_report (
     hr_approval ENUM('approved', 'declined'),
     mgt_approval ENUM('approved', 'declined'),
     status ENUM('approved', 'declined', 'pending', 'ongoing'),
-    FOREIGN KEY (leave_id) REFERENCES jvmc.jvmc_users(user_id)
+    FOREIGN KEY (leave_id) REFERENCES bkew76jt01b1ylysxnzp.jvmc_users(user_id)
   );
 `;
   const sqlLeaveHist = `
-CREATE TABLE IF NOT EXISTS jvmc.jvmc_leave_hist(
+CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_leave_hist(
   id INT PRIMARY KEY AUTO_INCREMENT,
   leave_id VARCHAR(255),
   name VARCHAR(255) NOT NULL,
@@ -136,22 +136,22 @@ CREATE TABLE IF NOT EXISTS jvmc.jvmc_leave_hist(
   start VARCHAR(255),
   approval ENUM('approved', 'declined', 'pending'),
   approved_by VARCHAR (255),
-  FOREIGN KEY (leave_id) REFERENCES jvmc.jvmc_users(user_id) /* This has a 1:M relation */
+  FOREIGN KEY (leave_id) REFERENCES bkew76jt01b1ylysxnzp.jvmc_users(user_id) /* This has a 1:M relation */
 );
 `;
 
   const sqlNotification = `
-  CREATE TABLE IF NOT EXISTS jvmc.jvmc_notification (
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_notification (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(70),
     message VARCHAR(255),
     user_id VARCHAR(255),
-    FOREIGN KEY (user_id) REFERENCES jvmc.jvmc_users(user_id) /* This has a 1:M relation */
+    FOREIGN KEY (user_id) REFERENCES bkew76jt01b1ylysxnzp.jvmc_users(user_id) /* This has a 1:M relation */
   );
 `;
 
   const sqlApplicant = `
-  CREATE TABLE IF NOT EXISTS jvmc.jvmc_trainee(
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_trainee(
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) UNIQUE,
     name VARCHAR(255) NOT NULL,
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS jvmc.jvmc_leave_hist(
   );
 `;
   const sqlSme = `
-CREATE TABLE IF NOT EXISTS jvmc.jvmc_sme(
+CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_sme(
   id INT PRIMARY KEY AUTO_INCREMENT,
   email VARCHAR(255) UNIQUE,
   name VARCHAR(255) NOT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS jvmc.jvmc_sme(
 
 // -- Create the jvmc_task table
 const sqlSmeRep = `
-  CREATE TABLE IF NOT EXISTS jvmc.jvmc_task (
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.jvmc_task (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
     name VARCHAR(255),
@@ -191,7 +191,7 @@ const sqlSmeRep = `
 `; 
 
 const sqltaskContent = `
-  CREATE TABLE IF NOT EXISTS jvmc.task_content (
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.task_content (
     id INT AUTO_INCREMENT PRIMARY KEY,
     task VARCHAR(255) NOT NULL,
     objective TEXT,
@@ -202,12 +202,12 @@ const sqltaskContent = `
     remark TEXT,
     status VARCHAR(100),
     task_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (task_id) REFERENCES jvmc.jvmc_task (user_id)
+    FOREIGN KEY (task_id) REFERENCES bkew76jt01b1ylysxnzp.jvmc_task (user_id)
   );
 `; 
 
 const sqlTaskList = `
-  CREATE TABLE IF NOT EXISTS jvmc.task_list (
+  CREATE TABLE IF NOT EXISTS bkew76jt01b1ylysxnzp.task_list (
     id INT AUTO_INCREMENT PRIMARY KEY,
     task VARCHAR(255) NOT NULL,
     objective TEXT,
@@ -217,7 +217,7 @@ const sqlTaskList = `
     achievement TEXT,
     remark TEXT,
     task_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (task_id) REFERENCES jvmc.jvmc_task(task_id)
+    FOREIGN KEY (task_id) REFERENCES bkew76jt01b1ylysxnzp.jvmc_task(task_id)
   );
 `; 
 
