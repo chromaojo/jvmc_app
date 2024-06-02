@@ -11,10 +11,10 @@ const mysql = require('mysql');
 
 const db = mysql.createConnection({
 
-  host: 'localhost',
+  host: 'bkew76jt01b1ylysxnzp-mysql.services.clever-cloud.com',
   user: 'root',
-  password: 'Oluchroma234',
-  database: 'jvmc',
+  password: 'i8joQsf92wyybq0xYWJh',
+  database: 'bkew76jt01b1ylysxnzp',
   waitForConnections: true,
 
 });
