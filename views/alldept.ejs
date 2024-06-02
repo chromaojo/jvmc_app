@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="card">
+        <div class="card-title">
+          <h4>List Of Departments in JV Management Consulting</h4>
+    
+        </div>
+        <div class="recent-comment">
+        <% userDept.forEach((department)=> { %>
+          <div class="border p-3">
+            <div class="media">
+              <div class="media-left">
+                <a href="#"><div class="badge badge-primary p-3">Approved</div> <br>
+                </a>
+                <!-- If user is Management Allow this -->
+                <a href="/mgt/del/<%= department.dept_id %>" class="badge badge-danger w-100 mt-2 p-3"> Delete Department</a> 
+
+                
+              </div>
+              <div class="media-body p-2">
+                <h4 class="media-heading ">Department : <%= department.name %></h4>
+                <p class="text-capitalize">Objective : <%= department.objective %> </p>
+                <div class="comment-action">
+                  <div class="badge bg-facebook text-light p-3">Head Of Department : <%= department.hod %></div>                
+                </div>
+                <p class="comment-date">Department Id : <%= department.dept_id %></p>
+              </div>
+            </div>
+          </div>
+           <% }); %>
+         <!-- End Of Media -->
+        </div>
+      </div>
+</div>

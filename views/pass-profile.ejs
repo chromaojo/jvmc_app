@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="card">
+        <h2>Edit Your Profile</h2>
+        <h4 class="text-danger">
+            <%= message %>
+        </h4>
+        <div class="card rounded p-4"> <br>
+            <div class="row">
+                <div class="col">
+                    <form action="/staff/profile/updatePass" method="POST">
+                        <div class="mb-3">
+                            <input type="text" name="oldPassword" class="form-control" placeholder="Old Password">
+                        </div>
+                        <div class="mb-3 ">
+                            <button type="submit" class="btn btn-outline-primary ">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                    <form action="/staff/profile/updatePass" method="POST">
+                        <div class="mb-3">
+                            <input type="text" name="oldPassword" class="form-control" placeholder="Old Password">
+                        </div>
+                        <div class="mb-3 ">
+                            <button type="submit" class="btn btn-outline-primary ">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

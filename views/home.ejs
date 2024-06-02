@@ -1,0 +1,140 @@
+<!-- Carousel Section  -->
+<div class="row">
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+
+                <img src="/assets/img/screen1.jpg" alt="" >
+
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Announcement..</h1>
+                        <p> This is a section for any Information from the management to everyone.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/assets/img/banner1.jpg" alt="" class="w-100" height="160vh">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Management Alert.</h1>
+                        <p> This is a very simple section for any Information from the management to everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" id="login">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-title">
+                <h4>Reports</h4>
+
+            </div>
+            <div class="card-body">
+                <ul class="timeline">
+                    <% if (userRept=="" ) { %>
+                        <br>
+                        <h3 class="m-5 text-center mb-5">There is no report available at the moment</h3>
+                        <br>
+                        <% } else{%>
+                            <% userRept.forEach((department)=> { %>
+                                <li>
+                                    <div class="timeline-badge success"><i class="fa fa-check-circle-o"></i></div>
+                                    <div class="timeline-panel">
+                                        <a href="/dash/<%= department.report_id %>">
+                                            <div class="timeline-heading">
+                                                <h5 class="timeline-title text-capitalize">
+                                                    <%= department.date %> || <%= department.title %>
+                                                </h5>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p>
+                                                    <%= department.time %> || <%= department.name %>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <% }); %>
+                                    <% } %>
+                </ul>
+            </div>
+        </div>
+        <!-- /# card -->
+    </div>
+    <div class="col-md-4">
+        <div class="card border-primary rounded">
+
+            <div class="user-card-profile round-img text-center">
+                <a href="/staff/profile">
+                    <img class="height-150" src="<%= userData.profilePix %>" alt="Profile Picture">
+                </a>
+            </div>
+            <div class="designation m-t-27 m-b-27 text-center">
+                <a href="/staff/profile">
+                    <h4 class="text-capitalize">
+                        <%= userData.surname %>
+                            <%= userData.otherNames %>
+                    </h4>
+                    <h6 class="text-capitalize">
+                        <%= userData.office %>
+                    </h6>
+                </a>
+            </div>
+        </div>
+        <div class="card p-0">
+            <p class="text-center mt-2">Best Staff Of The Month </p>
+            <div class="stat-widget-three home-widget-three p-3">
+                <div class="border">
+                    <div class="stat-icon bg-facebook">
+                        <i class="ti-thumb-up"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-digit">Nominate The Best Staff</div>
+                        <div class="stat-text">Best Staff</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card p-0">
+            <p class="text-center mt-2">Performance Tracker </p>
+            <div class="stat-widget-three home-widget-three p-3">
+                <div class="border">
+                    <div class="stat-icon bg-primary">
+                        <i class="ti-panel"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-digit">Track Your Performance</div>
+                        <div class="stat-text">Monthly Tracker</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#">
+            <div class="card p-0">
+                <p class="text-center mt-2">Leave Application </p>
+                <div class="stat-widget-three home-widget-three p-3">
+                    <div class="border">
+                        <div class="stat-icon bg-facebook">
+                            <i class="ti-pulse"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-digit"><small>Need To Apply For Leave?</small></div>
+                            <div class="stat-text">Apply Early</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <!-- /# card -->
+        <br> <br><br>
+    </div> <br> <br><br>
+</div>
+</div>
