@@ -44,7 +44,7 @@ route.post('/regAdmin1', async (req, res) => {
     const objective = "To ensure every human processes is actualized."
 
 
-    const sql = `INSERT INTO jvmc.jvmc_dept SET ?`;
+    const sql = `INSERT INTO bkew76jt01b1ylysxnzp.jvmc_dept SET ?`;
             const values = { name, objective };
             db.query(sql, values, (err, result) => {
                 if (err) {
@@ -60,7 +60,7 @@ route.post('/regAdmin1', async (req, res) => {
     // }
 
     // Check if email already exists
-    db.query('SELECT email FROM jvmc.jvmc_users WHERE email = ?', [email], async (error, result) => {
+    db.query('SELECT email FROM bkew76jt01b1ylysxnzp.jvmc_users WHERE email = ?', [email], async (error, result) => {
         if (error) {
             console.log("Customized Error ", error);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -74,7 +74,7 @@ route.post('/regAdmin1', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insert user into database
-        db.query('INSERT INTO jvmc.jvmc_users SET ?', { email, password: hashedPassword, user_id, user_role, department }, (error, result) => {
+        db.query('INSERT INTO bkew76jt01b1ylysxnzp.jvmc_users SET ?', { email, password: hashedPassword, user_id, user_role, department }, (error, result) => {
             if (error) {
                 console.log('A Registration Error Occurred ', error);
                 return res.status(500).json({ message: 'Internal Server Error' });
@@ -112,7 +112,7 @@ route.post('/regAdmin1', async (req, res) => {
 
 
             // To Fill the profile Data 
-            db.query('SELECT * FROM jvmc.jvmc_users WHERE email = ?', [email], async (error, result) => {
+            db.query('SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_users WHERE email = ?', [email], async (error, result) => {
                 if (error) {
                     console.log("Account creation Error ", error);
                     return res.status(500).json({ message: 'Account Server Error' });
@@ -120,7 +120,7 @@ route.post('/regAdmin1', async (req, res) => {
                 const user_id = result[0].user_id
                 const staff_id = rand + 'mgt'
                 // Insert account data
-                const sql = `INSERT INTO jvmc.jvmc_profile SET ?`;
+                const sql = `INSERT INTO bkew76jt01b1ylysxnzp.jvmc_profile SET ?`;
                 const values = { user_id, surname, otherNames, phone_number, staff_id };
                 db.query(sql, values, (err, result) => {
                     if (err) {
@@ -152,7 +152,7 @@ route.get('/new', (req, res) => {
     } else {
         const userId = req.params.userId;
         const sql = `
-          SELECT * FROM jvmc.jvmc_dept;
+          SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_dept;
         `;
 
         db.query(sql, [userId], (err, results) => {
@@ -182,7 +182,7 @@ route.post('/register/new', async (req, res) => {
         otherNames, department } = req.body;
    
     // Check if email already exists
-    db.query('SELECT email FROM jvmc.jvmc_users WHERE email = ?', [email], async (error, result) => {
+    db.query('SELECT email FROM bkew76jt01b1ylysxnzp.jvmc_users WHERE email = ?', [email], async (error, result) => {
         if (error) {
             console.log("Customized Error ", error);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -196,7 +196,7 @@ route.post('/register/new', async (req, res) => {
         const hashedPassword = await bcrypt.hash(phone_number, 10);
         // Insert user into database
         const user_id = rando + 'jvmc'
-        db.query('INSERT INTO jvmc.jvmc_users SET ?', { email, password: hashedPassword, user_id, user_role: 'staff', department }, (error, result) => {
+        db.query('INSERT INTO bkew76jt01b1ylysxnzp.jvmc_users SET ?', { email, password: hashedPassword, user_id, user_role: 'staff', department }, (error, result) => {
             if (error) {
                 console.log('A Registration Error Occurred ', error);
                 return res.status(500).json({ message: 'Internal Server Error' });
@@ -244,7 +244,7 @@ route.post('/register/new', async (req, res) => {
 
 
             // To Fill the profile Data 
-            db.query('SELECT * FROM jvmc.jvmc_users WHERE email = ?', [email], async (error, result) => {
+            db.query('SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_users WHERE email = ?', [email], async (error, result) => {
                 if (error) {
                     console.log("Account creation Error ", error);
                     return res.status(500).json({ message: 'Account Server Error' });
@@ -254,7 +254,7 @@ route.post('/register/new', async (req, res) => {
                 const staff_id = 'jvmc/'+ rando + '/' + staffer[1] + '/' + staffer[0];
                 const leave_total = 20;
                 // Insert account data
-                const sql = `INSERT INTO jvmc.jvmc_profile SET ?`;
+                const sql = `INSERT INTO bkew76jt01b1ylysxnzp.jvmc_profile SET ?`;
                 const values = {
                     address, resume_date, phone_number, leave_total,
                     gender, country, state_origin, whatsapp, office, job_status, bank_name,
@@ -294,7 +294,7 @@ route.get('/links', UserLoggin, (req, res) => {
 
 route.get('/dept', UserLoggin, (req, res) => {
 
-    const query = `SELECT * FROM jvmc.jvmc_profile `;
+    const query = `SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_profile `;
     
 
     db.query(query, (err, results) => {
@@ -317,7 +317,7 @@ route.get('/dept', UserLoggin, (req, res) => {
 route.post('/create/dept', (req, res) => {
     const { name, objective, hod } = req.body;
     const userData = req.app.get('userData');
-    db.query('SELECT name FROM jvmc.jvmc_dept WHERE name = ?', [name], async (error, result) => {
+    db.query('SELECT name FROM bkew76jt01b1ylysxnzp.jvmc_dept WHERE name = ?', [name], async (error, result) => {
 
         if (error) {
             return res.status(500).send('Internal Profile Error');
@@ -329,7 +329,7 @@ route.post('/create/dept', (req, res) => {
             res.render('create-dept', { userData, message });
         } else {
             const dept_id = rand
-            const sql = `INSERT INTO jvmc.jvmc_dept SET ?`;
+            const sql = `INSERT INTO bkew76jt01b1ylysxnzp.jvmc_dept SET ?`;
             const values = { name, objective, hod, dept_id };
             db.query(sql, values, (err, result) => {
                 if (err) {
@@ -358,7 +358,7 @@ route.get('/del/:dept_id', UserLoggin, async (req, res) => {
             return res.status(401).send('Unauthorized');
         }
 
-        const sql = `DELETE FROM jvmc.jvmc_dept WHERE dept_id = ?;`;
+        const sql = `DELETE FROM bkew76jt01b1ylysxnzp.jvmc_dept WHERE dept_id = ?;`;
             db.query(sql, [dept_id], (err, result) => {
                 if (err) {
                     console.error('Error deleting Department :', err);
@@ -390,7 +390,7 @@ route.post('/new/sme', async (req, res) => {
     const address = local + ' ,' + state + " State, " + country
     const unique_id = 'SME' + rand
 
-    db.query('SELECT email FROM jvmc.jvmc_sme WHERE email = ?', [email], async (error, result) => {
+    db.query('SELECT email FROM bkew76jt01b1ylysxnzp.jvmc_sme WHERE email = ?', [email], async (error, result) => {
 
         if (error) {
             return res.status(500).send('Internal Profile Error');
@@ -403,14 +403,14 @@ route.post('/new/sme', async (req, res) => {
         } else {
 
             // To Fill the task Data 
-            const sql = `INSERT INTO jvmc.jvmc_sme SET ?`;
+            const sql = `INSERT INTO bkew76jt01b1ylysxnzp.jvmc_sme SET ?`;
             const values = { name, email, about, staff_strength, phone_number, phone_number1, address, unique_id };
             db.query(sql, values, (err, result) => {
                 if (err) {
                     console.error('Error storing account data:', err);
                     return res.status(500).send('Internal Profile Error');
                 }
-                const sqls = `INSERT INTO jvmc.sme_rep SET ?`;
+                const sqls = `INSERT INTO bkew76jt01b1ylysxnzp.sme_rep SET ?`;
 
                 const currentDate = new Date();
 
@@ -440,7 +440,7 @@ route.post('/new/sme', async (req, res) => {
 route.get('/jvmc_sme', UserLoggin, (req, res) => {
     const userData = req.cookies.user ? JSON.parse(req.cookies.user) : null;
     // Query to select all rows from the table ordered by id in descending order (most recent first)
-    const sql = 'SELECT * FROM jvmc.jvmc_sme ORDER BY id DESC';
+    const sql = 'SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_sme ORDER BY id DESC';
 
     // Execute the query
     db.query(sql, (err, results) => {
@@ -463,7 +463,7 @@ route.get('/jvmc_sme/:id', UserLoggin, (req, res) => {
     const user_id = req.params.id;
     const userData = req.cookies.user ? JSON.parse(req.cookies.user) : null;
     // Query to select all rows from the table ordered by id in descending order (most recent first)
-    const sql = 'SELECT * FROM jvmc.jvmc_sme WHERE id = ?';
+    const sql = 'SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_sme WHERE id = ?';
 
 
     // Execute the query
@@ -536,7 +536,7 @@ route.post('/add/rep', UserLoggin, async (req, res) => {
         return res.status(400).send('All fields are required');
     }
     // Check if task_id exists in jvmc_task table
-    const checkSql = 'SELECT * FROM jvmc.jvmc_task WHERE task_id = ?';
+    const checkSql = 'SELECT * FROM bkew76jt01b1ylysxnzp.jvmc_task WHERE task_id = ?';
     db.query(checkSql, [task_id], (checkErr, checkResult) => {
         if (checkErr) {
             console.error('Error checking task_id:', checkErr);
@@ -547,7 +547,7 @@ route.post('/add/rep', UserLoggin, async (req, res) => {
             return res.status(404).send('task_id not found');
         }
         // Proceed with inserting into task_list
-        const insertSql = `INSERT INTO jvmc.task_list (action, outcome, status, task_id) VALUES (?, ?, ?, ?)`;
+        const insertSql = `INSERT INTO bkew76jt01b1ylysxnzp.task_list (action, outcome, status, task_id) VALUES (?, ?, ?, ?)`;
         const values = [action, outcome, status, task_id];
 
         db.query(insertSql, values, (insertErr, insertResult) => {
@@ -571,7 +571,7 @@ route.get('/del/content/:id', UserLoggin, async (req, res) => {
             return res.status(401).send('Unauthorized');
         }
 
-        const sqls = `SELECT * FROM jvmc.task_list WHERE id = ?;`;
+        const sqls = `SELECT * FROM bkew76jt01b1ylysxnzp.task_list WHERE id = ?;`;
         db.query(sqls, [id], (err, results) => {
             if (err) {
                 console.error('Error deleting task content:', err);
@@ -579,7 +579,7 @@ route.get('/del/content/:id', UserLoggin, async (req, res) => {
             }
             const task_id = results[0].task_id
             // Perform the deletion
-            const sql = `DELETE FROM jvmc.task_list WHERE id = ?;`;
+            const sql = `DELETE FROM bkew76jt01b1ylysxnzp.task_list WHERE id = ?;`;
             db.query(sql, [id], (err, result) => {
                 if (err) {
                     console.error('Error deleting task content:', err);
@@ -611,7 +611,7 @@ route.get('/del/task/:id', UserLoggin, async (req, res) => {
         }
 
         // Perform the deletion
-        const sql = `DELETE FROM jvmc.task_list WHERE task_id = ?;`;
+        const sql = `DELETE FROM bkew76jt01b1ylysxnzp.task_list WHERE task_id = ?;`;
         db.query(sql, [task_id], (err, result) => {
             if (err) {
                 console.error('Error deleting task content:', err);
@@ -621,7 +621,7 @@ route.get('/del/task/:id', UserLoggin, async (req, res) => {
         });
 
         // To Delete the parent 
-        const sqls = `DELETE FROM jvmc.jvmc_task WHERE task_id = ?;`;
+        const sqls = `DELETE FROM bkew76jt01b1ylysxnzp.jvmc_task WHERE task_id = ?;`;
         db.query(sqls, [task_id], (err, result) => {
             if (err) {
                 console.error('Error deleting task content:', err);
