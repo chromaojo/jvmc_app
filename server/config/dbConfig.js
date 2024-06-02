@@ -1,23 +1,23 @@
 require('dotenv').config();
 const mysql = require('mysql');
 
-// const db = mysql.createConnection({
-//     host: process.env.HOST,
-//     user: process.env.USER,
-//     password: process.env.PASS,
-//     database: process.env.DATABASE,
-//     waitForConnections: true,
-//   });
-
 const db = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASS,
+    database: process.env.DATABASE,
+    waitForConnections: true,
+  });
 
-  host: 'bkew76jt01b1ylysxnzp-mysql.services.clever-cloud.com',
-  user: 'root',
-  password: 'i8joQsf92wyybq0xYWJh',
-  database: 'bkew76jt01b1ylysxnzp',
-  waitForConnections: true,
+// const db = mysql.createConnection({
 
-});
+//   host: 'bkew76jt01b1ylysxnzp-mysql.services.clever-cloud.com',
+//   user: 'root',
+//   password: 'i8joQsf92wyybq0xYWJh',
+//   database: 'bkew76jt01b1ylysxnzp',
+//   waitForConnections: true,
+
+// });
 
 
 // Workbench Setting 
